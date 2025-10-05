@@ -7,7 +7,7 @@ export default function Home() {
   const [error, setError] = useState<string>('');
   const [debugInfo, setDebugInfo] = useState<string>('');
 
-  const API_URL = 'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/default';
+  const API_URL = 'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/default/test';
 
   const testAWSConnection = async () => {
     setIsLoading(true);
