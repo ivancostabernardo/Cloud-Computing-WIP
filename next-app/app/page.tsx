@@ -50,6 +50,14 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+
+        <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+          AWS Services Test
+        </h1>
+        <AWSTestButton />
+      </div>
+        
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
