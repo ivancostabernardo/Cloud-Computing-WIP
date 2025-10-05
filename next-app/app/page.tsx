@@ -70,7 +70,7 @@ export default function Home() {
             <div className="mt-4 p-4 bg-red-50 rounded-lg">
               <p className="text-red-800 text-sm">{error}</p>
               <p className="text-red-600 text-xs mt-2">
-                Make sure to update the API_URL with your actual API Gateway endpoint.
+                Make sure to update the API_URL with your actual API Gateway endpoint. 2
               </p>
             </div>
           )}
