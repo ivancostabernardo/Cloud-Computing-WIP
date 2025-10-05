@@ -8,7 +8,7 @@ export default function Home() {
   const [debugInfo, setDebugInfo] = useState<string>('');
 
   // Replace with your actual API Gateway URL
-  const API_URL = 'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com';
+  const API_URL = 'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/default';
 
   const testAWSConnection = async () => {
     setIsLoading(true);
