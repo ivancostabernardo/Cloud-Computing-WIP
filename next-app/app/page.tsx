@@ -7,7 +7,7 @@ export default function Home() {
   const [error, setError] = useState<string>('');
 
   // TODO: Replace with your actual API Gateway URL
-  const API_URL = 'https://vif52qd4ua.execute-api.us-east-2.amazonaws.com/default/test-button-function';
+  const API_URL = 'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/default/test-button-function-v2';
 
   const testAWSConnection = async () => {
     setIsLoading(true);
