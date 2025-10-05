@@ -1,13 +1,17 @@
 'use client';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
+import * as pdfjs from 'pdfjs-dist';
+
+// Configure pdfjs worker
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export default function PDFUploader() {
-  const [wordCount, setWordCount] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [fileName, setFileName] = useState('');
+  const [wordCount, setWordCount] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [fileName, setFileName] = useState<string>('');
 
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
+  const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (!file) return;
 
     if (file.type !== 'application/pdf') {
@@ -20,20 +24,26 @@ export default function PDFUploader() {
     setWordCount(null);
 
     try {
-      const formData = new FormData();
-      formData.append('pdf', file);
-
-      const response = await fetch('/api/count-words', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setWordCount(data.wordCount);
-      } else {
-        throw new Error('Failed to process PDF');
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
+      
+      let fullText = '';
+      
+      // Extract text from all pages
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map((item: any) => item.str).join(' ');
+        fullText += pageText + ' ';
       }
+
+      // Count words
+      const wordCount = fullText
+        .split(/\s+/)
+        .filter(word => word.length > 0)
+        .length;
+
+      setWordCount(wordCount);
     } catch (error) {
       console.error('Error:', error);
       alert('Error processing PDF file');
