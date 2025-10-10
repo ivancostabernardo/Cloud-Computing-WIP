@@ -9,7 +9,7 @@ export default function Home() {
   const API_URLS = [
     'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/NewStage/test-button-function-v2',
     'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/NewStage/test',
-    'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/NewStage/
+    'https://zhndd3sr1a.execute-api.us-east-2.amazonaws.com/NewStage/'
   ];
 
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
